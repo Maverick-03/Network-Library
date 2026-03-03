@@ -7,18 +7,18 @@
 
 import Foundation
 
-protocol NetworkServiceProtocol{
+public protocol NetworkServiceProtocol{
     func request<T: Decodable>(_ request: URLRequest, decode: T.Type) async throws -> T
 }
 
-enum NetworkServiceError: Error {
+public enum NetworkServiceError: Error {
     case failedResponse(_ data: Data, urlResponse: URLResponse)
 }
 
-final class NetworkService: NetworkServiceProtocol {
+public final class NetworkService: NetworkServiceProtocol {
     let session: URLSession = .shared
     
-    func request<T: Decodable>(_ request: URLRequest, decode: T.Type) async throws -> T {
+    public func request<T: Decodable>(_ request: URLRequest, decode: T.Type) async throws -> T {
         do{
             let (data,urlResponse) = try await session.data(for: request)
             
