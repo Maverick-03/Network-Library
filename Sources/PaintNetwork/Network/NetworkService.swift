@@ -18,6 +18,8 @@ public enum NetworkServiceError: Error {
 public final class NetworkService: NetworkServiceProtocol {
     let session: URLSession = .shared
     
+    public init(){}
+    
     public func request<T: Decodable>(_ request: URLRequest, decode: T.Type) async throws -> T {
         do{
             let (data,urlResponse) = try await session.data(for: request)
