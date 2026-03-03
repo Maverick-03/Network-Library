@@ -13,6 +13,9 @@ public protocol Validator{
 
 public struct EmailValidator: Validator {
     public typealias Input = String
+    
+    public init() {}
+    
     public func validate(_ input: String) -> Bool {
         let emailRegex =
             #"^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"#
@@ -23,6 +26,8 @@ public struct EmailValidator: Validator {
 
 public struct PasswordValidator: Validator {
     public typealias Input = String
+    
+    public init() {}
     public func validate(_ input: String) -> Bool {
         return input.count >= 5
     }
