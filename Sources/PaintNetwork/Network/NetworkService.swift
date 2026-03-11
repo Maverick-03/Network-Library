@@ -27,9 +27,12 @@ public final class NetworkService: NetworkServiceProtocol {
             guard let urlResponse = urlResponse as? HTTPURLResponse, (200...299).contains(urlResponse.statusCode) else{
                 throw NetworkServiceError.failedResponse(data, urlResponse: urlResponse)
             }
-            
-            let result = try JSONDecoder().decode(T.self, from: data)
-            return result
+            if T.self == Data.self {
+                return data as! T
+            } else {
+                let result = try JSONDecoder().decode(T.self, from: data)
+                return result
+            }
         } catch {
             throw error
         }
